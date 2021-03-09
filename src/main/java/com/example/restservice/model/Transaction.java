@@ -1,8 +1,8 @@
-package com.example.restservice;
+package com.example.restservice.model;
 
 import java.util.Date;
 
-public class TransactionResponse {
+public class Transaction {
 	
 	private String accountNumber; 
 	
@@ -12,11 +12,14 @@ public class TransactionResponse {
 	
 	private double amount;
 	
-	public TransactionResponse(String accountNumber, Date transactionTS, String transactionType, double amount) {
+	public Transaction(String accountNumber, Date transactionTS, String transactionType, double amount) {
 		this.accountNumber = accountNumber;
 		this.transactionTs = transactionTS;
 		this.transactionType = transactionType;
 		this.amount = amount;
+	}
+
+	public Transaction() {
 	}
 
 	public void setAccountNumber(String accountNumber) {

@@ -3,11 +3,10 @@ package com.example.restservice;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.example.restservice.model.AccountResponse;
+import com.example.restservice.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AccountController {
@@ -19,8 +18,8 @@ public class AccountController {
 	    DEPOSIT, WITHDRAWAL;
 	}
 	
-	@Autowired  
-	AccountService accountService;  
+	@Autowired
+	AccountService accountService;
 
 	@GetMapping("/account/{accountNumber}/balance")
 	public AccountResponse getAccountBalance(@PathVariable String accountNumber) {
@@ -28,12 +27,17 @@ public class AccountController {
 	}
 	
 	@GetMapping("/account/{accountNumber}/statement")
-	public List<TransactionResponse> getStatement(@PathVariable String accountNumber,
-			@RequestParam(value="startDate") String startDate, 
-			@RequestParam(value="endDate") String endDate,
-			@RequestParam(value="txType", required = false) TxType txType
+	public List<Transaction> getStatement(@PathVariable String accountNumber,
+										  @RequestParam(value="startDate") String startDate,
+										  @RequestParam(value="endDate") String endDate,
+										  @RequestParam(value="txType", required = false) TxType txType
 			) {
 			
 		return accountService.getStatement(accountNumber,startDate,endDate,txType);
-	}	
+	}
+
+	@PostMapping("/transaction")
+	public void saveTransaction(@RequestBody Transaction transaction) {
+		accountService.saveTransaction(transaction);
+	}
 }

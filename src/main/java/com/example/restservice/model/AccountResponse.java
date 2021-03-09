@@ -1,11 +1,9 @@
-package com.example.restservice;
+package com.example.restservice.model;
 
 import java.util.Date;
 
 
-import lombok.Builder;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 //@Setter
 //@Builder
